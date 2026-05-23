@@ -1,0 +1,242 @@
+/* =====================================================
+   mejob — animations.css
+   Keyframes, transitions, scroll-reveal, micro-interactions
+   ===================================================== */
+
+/* ---- KEYFRAMES ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(20px, -20px) scale(1.05); }
+  66%       { transform: translate(-15px, 10px) scale(0.97); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(56,189,248,0); }
+}
+@keyframes cardFlicker {
+  0%   { border-color: var(--clr-border); }
+  50%  { border-color: rgba(249,115,22,0.4); }
+  100% { border-color: var(--clr-border); }
+}
+@keyframes progressGrow {
+  from { width: 0; }
+}
+@keyframes toastSlide {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+/* ---- BLOB ANIMATIONS ---- */
+.hero__blob--1 { animation: blobFloat 8s ease-in-out infinite; }
+.hero__blob--2 { animation: blobFloat 10s ease-in-out infinite reverse; }
+.hero__blob--3 { animation: blobFloat 7s ease-in-out infinite 2s; }
+
+/* ---- LOGO DOT PULSE ---- */
+.logo-dot { animation: dotPulse 2.5s ease-in-out infinite; }
+
+/* ---- SCROLL REVEAL ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delays for grid children */
+.reveal-stagger > *:nth-child(1)  { transition-delay: 0.05s; }
+.reveal-stagger > *:nth-child(2)  { transition-delay: 0.10s; }
+.reveal-stagger > *:nth-child(3)  { transition-delay: 0.15s; }
+.reveal-stagger > *:nth-child(4)  { transition-delay: 0.20s; }
+.reveal-stagger > *:nth-child(5)  { transition-delay: 0.25s; }
+.reveal-stagger > *:nth-child(6)  { transition-delay: 0.30s; }
+.reveal-stagger > *:nth-child(7)  { transition-delay: 0.35s; }
+.reveal-stagger > *:nth-child(8)  { transition-delay: 0.40s; }
+.reveal-stagger > *:nth-child(9)  { transition-delay: 0.45s; }
+.reveal-stagger > *:nth-child(10) { transition-delay: 0.50s; }
+
+/* ---- CARD HOVER GLOW ---- */
+.job-card::after,
+.freelance-card::after,
+.news-card::after,
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(249,115,22,0);
+  transition: box-shadow 0.3s ease;
+  pointer-events: none;
+}
+.job-card:hover::after,
+.freelance-card:hover::after {
+  box-shadow: inset 0 0 0 1px rgba(249,115,22,0.25);
+}
+
+/* ---- BUTTON RIPPLE ---- */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.btn:active::after { opacity: 1; }
+
+/* ---- ACTIVE SAVE BUTTON ---- */
+.job-card__save {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.job-card__save:hover { transform: scale(1.2); }
+.job-card__save.saved { animation: heartBounce 0.4s ease; }
+
+@keyframes heartBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* ---- NAV LINK UNDERLINE ---- */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 2px;
+  background: var(--clr-primary);
+  border-radius: 2px;
+  transition: left 0.25s ease, right 0.25s ease;
+}
+.nav-link:hover::after, .nav-link.active::after {
+  left: 12px; right: 12px;
+}
+
+/* ---- SEARCH BAR FOCUS GLOW ---- */
+.search-bar:focus-within {
+  border-color: rgba(249,115,22,0.4);
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 3px rgba(249,115,22,0.1),
+    var(--shadow-glow);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ---- FILTER TAB TRANSITION ---- */
+.filter-tab {
+  position: relative;
+  overflow: hidden;
+}
+.filter-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--clr-primary);
+  opacity: 0;
+  border-radius: inherit;
+  transform: scale(0.8);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.filter-tab.active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.filter-tab span { position: relative; z-index: 1; }
+
+/* ---- HIRING CARD PROGRESS ANIMATION ---- */
+.progress-fill {
+  animation: progressGrow 1.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* ---- SPINNING LOADER ---- */
+.loader {
+  width: 24px; height: 24px;
+  border: 2.5px solid var(--clr-border);
+  border-top-color: var(--clr-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ---- PAGE TRANSITION ---- */
+body { animation: fadeIn 0.4s ease both; }
+
+/* ---- REDUCE MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
